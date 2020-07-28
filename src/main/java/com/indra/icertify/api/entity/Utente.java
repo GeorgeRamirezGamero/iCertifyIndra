@@ -56,7 +56,7 @@ public class Utente implements Serializable{
 	@JoinColumn(name = "idDocIdent")
 	private DocumentoIdentita documentoIdentita;
 	
-	@OneToMany(targetEntity = Certificazione.class, mappedBy = "utente", cascade = CascadeType.ALL)
+	@OneToMany(targetEntity = Certificazione.class, /*mappedBy = "utente",*/ cascade = CascadeType.ALL)
 	private List<Certificazione> certificazioni = new ArrayList<>();
 	
 	@ManyToMany(cascade = CascadeType.ALL)
