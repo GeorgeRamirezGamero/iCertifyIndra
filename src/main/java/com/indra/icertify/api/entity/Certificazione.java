@@ -32,13 +32,13 @@ public class Certificazione implements Serializable {
 //	@JoinColumn(name = "idUtente")
 //	private Utente utente;
 	
-	private String tipoCertificazione;
+	private int tipoCertificazione;
 
-	public String getTipoCertificazione() {
+	public int getTipoCertificazione() {
 		return tipoCertificazione;
 	}
 
-	public void setTipoCertificazione(String tipoCertificazione) {
+	public void setTipoCertificazione(int tipoCertificazione) {
 		this.tipoCertificazione = tipoCertificazione;
 	}
 

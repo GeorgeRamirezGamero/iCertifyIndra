@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.indra.icertify.api.entity.Utente;
 
 @Repository
-public interface UtenteDao extends CrudRepository<Utente, Long> {
+public interface UtenteDao extends CrudRepository<Utente, Integer> {
 	
 	Utente findByMatricola(String matricola) throws Exception;
 	
