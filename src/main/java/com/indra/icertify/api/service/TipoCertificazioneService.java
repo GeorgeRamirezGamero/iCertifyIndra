@@ -90,6 +90,7 @@ public class TipoCertificazioneService {
 		}
 		log.info("***Microservice /getAllCertificazioneByAllTipoCertificazione End***");
 		
+		response.setEsito(esito);
 		return response;
 		
 	}

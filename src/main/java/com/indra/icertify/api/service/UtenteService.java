@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.indra.icertify.api.dao.UtenteDao;
@@ -34,7 +35,11 @@ public class UtenteService {
 			Utente utenteDb = utenteDao.findByMatricola(utente.getMatricola());
 			
 			if (utenteDb==null) {
+				String password = utente.getPassword();
+				BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+				utente.setPassword(bCryptPasswordEncoder.encode(password));
 				utenteDao.save(utente);
+				
 				esito.setDescrizione("Chiamata effettuata correttamente");
 			}else {
 				esito.setDescrizione("Esiste utente con la matricola inserita");
@@ -51,7 +56,6 @@ public class UtenteService {
 		
 	}
 	
-
 	public ResponseGetAllUtenti getAllUtenti() {
 
 		Esito esito = new Esito(0, "");
@@ -76,7 +80,6 @@ public class UtenteService {
 		return response;
 	}
 
-	
 	public ResponseGetUtente getUtenteByMatricola(String matricola) {
 
 		Esito esito = new Esito(0, "");
