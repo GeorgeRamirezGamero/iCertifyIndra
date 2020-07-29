@@ -2,7 +2,6 @@ package com.indra.icertify.api;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -13,11 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.indra.icertify.api.entity.Certificazione;
-import com.indra.icertify.api.entity.DocumentoIdentita;
-import com.indra.icertify.api.entity.Utente;
-import com.indra.icertify.api.entity.servicebean.Esito;
-import com.indra.icertify.api.entity.servicebean.ResponseGetAllUtenti;
+import com.indra.icertify.api.dao.TipoCertificazioneDao;
+import com.indra.icertify.api.entity.servicebean.CertificazioneByTipoCertificazione;
 import com.indra.icertify.api.service.UtenteService;
 
 @RunWith(SpringRunner.class)
@@ -29,13 +25,16 @@ public class UtenteRepositoryIntegrationTest {
 	
 	@Autowired
 	private UtenteService utenteService;
+
+	@Autowired
+	private TipoCertificazioneDao tipoCertificazioneDao;
 	
-	@Test
-	public void testGetAllUtente() {
-		
-		ResponseGetAllUtenti response= utenteService.getAllUtenti();
-		assertTrue(response != null);
-	}
+//	@Test
+//	public void testGetAllUtente() {
+//		
+//		ResponseGetAllUtenti response= utenteService.getAllUtenti();
+//		assertTrue(response != null);
+//	}
 	
 //	@Test
 //	public void testInsertUtente() {
@@ -69,5 +68,12 @@ public class UtenteRepositoryIntegrationTest {
 //		Esito response= utenteService.insertUtente(utente);
 //		assertTrue(response != null);
 //	}
+	
+	
+	@Test
+	public void testInsertUtente() {
+		List<Object> response = tipoCertificazioneDao.getAllCertificazioneByAllTipoCertificazione(); 
+		assertTrue(response != null);
+	}
 	
 }

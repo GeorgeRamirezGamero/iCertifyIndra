@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.indra.icertify.api.entity.TipoCertificazione;
 import com.indra.icertify.api.entity.servicebean.Esito;
+import com.indra.icertify.api.entity.servicebean.GetAllCertByAllTipoCertResponse;
 import com.indra.icertify.api.service.TipoCertificazioneService;
 
 @RequestMapping("tipoCertificazione")
@@ -30,5 +31,11 @@ public class TipoCertificazioneController {
     @ResponseStatus(HttpStatus.OK)
 	public @ResponseBody Esito insertUtente(@RequestBody TipoCertificazione tipoCertificazione, HttpServletRequest request, HttpServletResponse response) {
 		return tipoCertificazioneService.insertTipoCertificazione(tipoCertificazione);
+	}
+    
+    @RequestMapping(value = "/getAllcertificazioneByAllTipoCertificazione", method = RequestMethod.GET, produces = {"application/json", "application/xml"}) 
+    @ResponseStatus(HttpStatus.OK)
+	public @ResponseBody GetAllCertByAllTipoCertResponse getAllTipoCertificazione(HttpServletRequest request, HttpServletResponse response) {
+		return tipoCertificazioneService.getAllCertificazioneByAllTipoCertificazione();
 	}
 }

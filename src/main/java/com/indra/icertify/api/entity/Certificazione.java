@@ -26,7 +26,7 @@ public class Certificazione implements Serializable {
 
 	private String codEsame;
 	
-	private String descrizione;
+	private String descrizioneCertificazione;
 
 //	@ManyToOne(cascade = CascadeType.ALL)
 //	@JoinColumn(name = "idUtente")
@@ -42,8 +42,8 @@ public class Certificazione implements Serializable {
 		this.tipoCertificazione = tipoCertificazione;
 	}
 
-	public String getDescrizione() {
-		return descrizione;
+	public String getDescrizioneCertificazione() {
+		return descrizioneCertificazione;
 	}
 
 	public int getIdcertificazione() {
@@ -62,8 +62,8 @@ public class Certificazione implements Serializable {
 //		this.utente = utente;
 //	}
 
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+	public void setDescrizioneCertificazione(String descrizioneCertificazione) {
+		this.descrizioneCertificazione = descrizioneCertificazione;
 	}
 
 	public String getCodEsame() {
