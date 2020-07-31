@@ -27,12 +27,40 @@ public class Certificazione implements Serializable {
 	private String codEsame;
 	
 	private String descrizioneCertificazione;
+	
+	private String path;
+	
+	private String payload;
 
+	private int tipoCertificazione;
+	
 //	@ManyToOne(cascade = CascadeType.ALL)
 //	@JoinColumn(name = "idUtente")
 //	private Utente utente;
 	
-	private int tipoCertificazione;
+	public int getIdCertificazione() {
+		return idCertificazione;
+	}
+
+	public void setIdCertificazione(int idCertificazione) {
+		this.idCertificazione = idCertificazione;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getPayload() {
+		return payload;
+	}
+
+	public void setPayload(String payload) {
+		this.payload = payload;
+	}
 
 	public int getTipoCertificazione() {
 		return tipoCertificazione;

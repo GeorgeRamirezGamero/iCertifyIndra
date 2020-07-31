@@ -1,6 +1,9 @@
 package com.indra.icertify.api.service;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.indra.icertify.api.dao.UtenteDao;
+import com.indra.icertify.api.entity.Certificazione;
 import com.indra.icertify.api.entity.Utente;
 import com.indra.icertify.api.entity.servicebean.Esito;
 import com.indra.icertify.api.entity.servicebean.ResponseGetAllUtenti;
@@ -35,6 +39,14 @@ public class UtenteService {
 			Utente utenteDb = utenteDao.findByMatricola(utente.getMatricola());
 			
 			if (utenteDb==null) {
+
+				if (utente.getCertificazioni() != null) {					
+					convertCertificazioniToBase64 (utente);
+				}else {
+					esito.setDescrizione("Devi inserire almeno una certificazione");
+					return esito;
+				}
+				
 				String password = utente.getPassword();
 				BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
 				utente.setPassword(bCryptPasswordEncoder.encode(password));
@@ -47,7 +59,7 @@ public class UtenteService {
 			
 		} catch (Exception e) {
 			esito.setCodErrore(-1);
-			esito.setDescrizione("Errore a interfacciarsi con il DB --> " + e.getMessage());
+			esito.setDescrizione("Errore --> " + e.getMessage());
 			log.info("****Exception insertUtente**** --> "+ e.getMessage());
 			log.info("****Exception insertUtente**** --> "+ e.getLocalizedMessage());
 		}
@@ -113,5 +125,25 @@ public class UtenteService {
 		return response;
 	}
 
+	public void convertCertificazioniToBase64(Utente utente) throws Exception {
+		for (Certificazione certificazione : utente.getCertificazioni()) {
+
+			String filePath = certificazione.getPath();
+			byte[] input_file = Files.readAllBytes(Paths.get(filePath));
+
+			byte[] encodedBytes = Base64.getEncoder().encode(input_file);
+			String encodedString = new String(encodedBytes);
+			
+			certificazione.setPayload(encodedString);
+
+//			        byte[] decodedBytes = Base64.getDecoder().decode(encodedString.getBytes());
+//
+//			        FileOutputStream fos = new FileOutputStream(filePath+newFileName);
+//			        fos.write(decodedBytes);
+//			        fos.flush();
+//			        fos.close();
+		}
+
+	}
 	
 }
