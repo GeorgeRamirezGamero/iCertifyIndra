@@ -1,5 +1,6 @@
 package com.indra.icertify.api.service;
 
+import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -68,15 +71,17 @@ public class UtenteService {
 		
 	}
 	
-	public ResponseGetAllUtenti getAllUtenti() {
+	public List<Utente> getAllUtenti() {
 
 		Esito esito = new Esito(0, "");
-		ResponseGetAllUtenti response = new ResponseGetAllUtenti(new ArrayList<Utente>(), esito);
+		ResponseGetAllUtenti response = new ResponseGetAllUtenti();
+		response.setEsito(esito);
+		List<Utente> utenteDb = new ArrayList<>();
 		
 		try {
 			log.info("**Microservice /getUtenti Start**");
 			
-			List<Utente> utenteDb = (List<Utente>)utenteDao.findAll();
+			utenteDb = (List<Utente>)utenteDao.findAll();
 			response.getUtenti().addAll(utenteDb);
 			if (utenteDb.size()>0)			
 				esito.setDescrizione("Chiamata effettuata correttamente");
@@ -89,13 +94,19 @@ public class UtenteService {
 			log.info("****Exception ResponseGetAllUtente**** -->"+ e.getLocalizedMessage());
 		}
 		log.info("***Microservice /getUtenti End***");
-		return response;
+		return utenteDb;
 	}
 
+	public ResponseEntity<String> getUtenteByMatricolaWSO2 () {
+		return new ResponseEntity<>("GET UTENTE BY MATRICOLA WSO2", HttpStatus.OK);
+
+	}
+
+	
 	public ResponseGetUtente getUtenteByMatricola(String matricola) {
 
 		Esito esito = new Esito(0, "");
-		ResponseGetUtente response = new ResponseGetUtente();
+		ResponseGetUtente response = new ResponseGetUtente();		
 		
 		try {
 			if (!matricola.isEmpty() && matricola!=null) {
@@ -106,6 +117,7 @@ public class UtenteService {
 					esito.setDescrizione("Non ci sono Utenti con la matricola inserita");
 				}else {
 					esito.setDescrizione("Chiamata effettuata correttamente");	
+					convertBase64ToCertificazione (response.getUtente());
 				}
 				response.setEsito(esito);
 			}
@@ -136,14 +148,24 @@ public class UtenteService {
 			
 			certificazione.setPayload(encodedString);
 
-//			        byte[] decodedBytes = Base64.getDecoder().decode(encodedString.getBytes());
-//
-//			        FileOutputStream fos = new FileOutputStream(filePath+newFileName);
-//			        fos.write(decodedBytes);
-//			        fos.flush();
-//			        fos.close();
 		}
 
 	}
+	
+	public void convertBase64ToCertificazione(Utente utente) throws Exception {
+		for (Certificazione certificazione : utente.getCertificazioni()) {
+
+			byte[] decodedBytes = Base64.getDecoder().decode(certificazione.getPayload().getBytes());
+
+			FileOutputStream fos = new FileOutputStream("C:\\\\Users\\\\garamirez\\\\Documents\\\\" + utente.getCognome() + ".pdf");
+			fos.write(decodedBytes);
+			fos.flush();
+			fos.close();
+		}
+
+	}
+	
+
+
 	
 }

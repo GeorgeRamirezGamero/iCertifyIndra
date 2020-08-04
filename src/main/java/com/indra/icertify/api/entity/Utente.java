@@ -1,6 +1,5 @@
 package com.indra.icertify.api.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +19,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity 
 @Table(name = "utente")
-public class Utente implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1671417246199538663L;
+public class Utente {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
@@ -40,14 +34,6 @@ public class Utente implements Serializable{
 	
 	private String nome;
 	
-	public DocumentoIdentita getDocumentoIdentita() {
-		return documentoIdentita;
-	}
-
-	public void setDocumentoIdentita(DocumentoIdentita documentoIdentita) {
-		this.documentoIdentita = documentoIdentita;
-	}
-
 	private String password;		
 
 	private String ruolo;
@@ -65,47 +51,13 @@ public class Utente implements Serializable{
 			  joinColumns = @JoinColumn(name = "utente_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "progetto_id"))
 	private List<Progetto> progetti;
-	
-	
-	public List<Progetto> getProgetti() {
-		return progetti;
-	}
 
-	public void setProgetti(List<Progetto> progetti) {
-		this.progetti = progetti;
-	}
-
-	
 	public int getIdUtente() {
 		return idUtente;
 	}
 
 	public void setIdUtente(int idUtente) {
 		this.idUtente = idUtente;
-	}
-
-	public String getMatricola() {
-		return matricola;
-	}
-
-	public void setMatricola(String matricola) {
-		this.matricola = matricola;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getCognome() {
@@ -124,8 +76,44 @@ public class Utente implements Serializable{
 		this.email = email;
 	}
 
+	public String getMatricola() {
+		return matricola;
+	}
+
+	public void setMatricola(String matricola) {
+		this.matricola = matricola;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getRuolo() {
 		return ruolo;
+	}
+
+	public void setRuolo(String ruolo) {
+		this.ruolo = ruolo;
+	}
+
+	public DocumentoIdentita getDocumentoIdentita() {
+		return documentoIdentita;
+	}
+
+	public void setDocumentoIdentita(DocumentoIdentita documentoIdentita) {
+		this.documentoIdentita = documentoIdentita;
 	}
 
 	public List<Certificazione> getCertificazioni() {
@@ -136,8 +124,15 @@ public class Utente implements Serializable{
 		this.certificazioni = certificazioni;
 	}
 
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
+	public List<Progetto> getProgetti() {
+		return progetti;
 	}
+
+	public void setProgetti(List<Progetto> progetti) {
+		this.progetti = progetti;
+	}
+	
+	
+	
 
 }
