@@ -30,6 +30,8 @@ public class Utente {
 	
 	private String email;
 	
+	private Boolean mailVerificata = false;
+	
 	private String matricola;
 	
 	private String nome;
@@ -58,6 +60,14 @@ public class Utente {
 
 	public void setIdUtente(int idUtente) {
 		this.idUtente = idUtente;
+	}
+
+	public Boolean getMailVerificata() {
+		return mailVerificata;
+	}
+
+	public void setMailVerificata(Boolean mailVerificata) {
+		this.mailVerificata = mailVerificata;
 	}
 
 	public String getCognome() {

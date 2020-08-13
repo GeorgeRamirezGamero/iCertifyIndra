@@ -10,7 +10,7 @@ public interface UtenteDao extends CrudRepository<Utente, Integer> {
 	
 	Utente findByMatricola(String matricola) throws Exception;
 	
-	
+	Utente findByEmail(String mail) throws Exception;
 	
 	
 	
