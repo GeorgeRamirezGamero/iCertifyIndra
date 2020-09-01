@@ -25,8 +25,9 @@ public class SendMail {
 		Boolean response = false;
 
 		String to = toEmail;
-		String from = "georgeanthony_34@hotmail.com";
-		String password = "Bnl@1989";
+		//Inserire mail e password Hotmail, se si usa un altro ricavare lo smtp.host e porta
+		String from = "";
+		String password = "";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.live.com");
