@@ -45,7 +45,7 @@ public class Utente {
 	private DocumentoIdentita documentoIdentita;
 	
 	@OneToMany(targetEntity = Certificazione.class, /*mappedBy = "utente",*/ cascade = CascadeType.ALL)
-	private List<Certificazione> certificazioni = new ArrayList<>();
+	private List<Certificazione> certificazioni = null;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
