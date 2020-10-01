@@ -67,7 +67,7 @@ public class TipoCertificazioneService {
 			List<Object> procedureCertifiTypeCertificazione = tipoCertificazioneDao.getAllCertificazioneByAllTipoCertificazione();
 			List<CertificazioneByTipoCertificazione> listBe = new ArrayList<>();
 		
-			Iterator it = procedureCertifiTypeCertificazione.iterator();
+			Iterator<Object> it = procedureCertifiTypeCertificazione.iterator();
 			while (it.hasNext()) {
 				Object[] line = (Object[]) it.next();
 				int idTipoCertificazione = (int)line[0];

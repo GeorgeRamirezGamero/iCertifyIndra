@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.indra.icertify.api.dao.TipoCertificazioneDao;
-import com.indra.icertify.api.entity.servicebean.CertificazioneByTipoCertificazione;
 import com.indra.icertify.api.service.UtenteService;
 
 @RunWith(SpringRunner.class)
