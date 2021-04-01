@@ -50,6 +50,8 @@ public class DocumentoIdentita implements Serializable {
 
 	public void setNumeroCarta(String numeroCarta) {
 		this.numeroCarta = numeroCarta;
-	}		
+	}
+
+//////TEST TEST TEST	
 	
 }
