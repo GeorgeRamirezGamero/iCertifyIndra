@@ -21,9 +21,6 @@ import com.indra.icertify.api.service.TipoCertificazioneService;
 @RestController
 public class TipoCertificazioneController { 
 	
-//    private static final Logger log = LoggerFactory.getLogger(TicketController.class);
-
-	
 	@Autowired
 	private TipoCertificazioneService tipoCertificazioneService;
 	
